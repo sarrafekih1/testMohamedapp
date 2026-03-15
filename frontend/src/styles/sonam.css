@@ -1,0 +1,508 @@
+/* src/styles/sonam.css - Design System SONAM */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================
+   COMPOSANTS SONAM RÉUTILISABLES
+   ================================ */
+
+@layer components {
+  /* BOUTONS SONAM */
+  .btn-sonam-primary {
+    @apply bg-sonam-primary hover:bg-sonam-active text-text-white font-medium py-3 px-6 rounded-sonam-md transition-all duration-200 ease-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-sonam-primary focus:ring-opacity-50;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-sonam-accent {
+    @apply bg-sonam-accent hover:bg-green-600 text-text-white font-medium py-3 px-6 rounded-sonam-md transition-all duration-200 ease-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-sonam-accent focus:ring-opacity-50;
+  }
+  
+  .btn-sonam-secondary {
+    @apply bg-white border border-border-light hover:border-sonam-primary text-sonam-primary font-medium py-3 px-6 rounded-sonam-md transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-sonam-primary focus:ring-opacity-30;
+  }
+
+  .btn-sonam-ghost {
+    @apply text-text-secondary hover:text-sonam-primary hover:bg-sonam-primary hover:bg-opacity-5 py-2 px-4 rounded-sonam-sm transition-all duration-200;
+  }
+
+  /* INPUTS & FORMS */
+  .input-sonam {
+    @apply w-full px-4 py-3 border border-border-light rounded-sonam-md focus:outline-none focus:ring-2 focus:ring-sonam-primary focus:ring-opacity-50 focus:border-sonam-primary;
+    @apply transition-all duration-200 placeholder:text-text-light;
+  }
+
+  .textarea-sonam {
+    @apply input-sonam resize-none min-h-[120px];
+  }
+
+  /* CARDS */
+  .card-sonam {
+    @apply bg-white border border-border-light rounded-sonam-lg shadow-card transition-all duration-200;
+  }
+
+  .card-sonam-hover {
+    @apply card-sonam hover:shadow-lg hover:border-sonam-primary hover:border-opacity-30 cursor-pointer;
+  }
+
+  .card-knowledge {
+    @apply bg-bg-knowledge border border-border-light rounded-sonam-lg p-4;
+  }
+
+  .card-file {
+    @apply bg-white border border-border-subtle rounded-sonam-sm p-4 transition-all duration-200;
+    @apply hover:border-sonam-primary hover:shadow-md;
+  }
+
+  /* SIDEBAR ELEMENTS */
+  .sidebar-main {
+    @apply w-72 bg-sonam-primary flex flex-col shadow-sidebar transition-all duration-300;
+  }
+
+  .sidebar-collapsed {
+    @apply w-20;
+  }
+
+  .sidebar-hidden {
+    @apply -translate-x-full;
+  }
+
+
+  .sidebar-item {
+  @apply w-full flex items-center gap-3 px-4 py-3 mx-2 text-text-white rounded-sonam-md transition-all duration-200;
+  @apply hover:bg-white hover:bg-opacity-10 cursor-pointer;
+}
+
+.sidebar-item-active {
+  @apply w-full flex items-center gap-3 px-4 py-3 mx-2 text-text-white rounded-sonam-md transition-all duration-200;
+  @apply bg-sonam-active cursor-pointer;
+}
+  .sidebar-profile {
+    @apply flex items-center gap-3 p-4 bg-sonam-profile rounded-sonam-lg cursor-pointer transition-all duration-200;
+    @apply hover:bg-opacity-90;
+  }
+
+  /* BADGES */
+  .badge-active {
+    @apply inline-flex items-center px-3 py-1 text-sm font-medium text-white bg-sonam-accent rounded-full;
+  }
+
+  .badge-inactive {
+    @apply inline-flex items-center px-3 py-1 text-sm font-medium text-text-secondary bg-gray-100 rounded-full;
+  }
+
+  .badge-status {
+    @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded-full;
+  }
+
+
+  /* NAVIGATION TABS */
+.tabs-container {
+  @apply flex gap-1 border-b border-border-light;
+}
+
+.tab-button {
+  @apply px-4 py-3 text-sm font-medium border-b-2 transition-all duration-200;
+  @apply hover:text-sonam-primary cursor-pointer;
+}
+
+.tab-button-active {
+  @apply border-sonam-primary text-sonam-primary bg-sonam-primary bg-opacity-5;
+}
+
+.tab-button-inactive {
+  @apply border-transparent text-text-secondary hover:border-sonam-primary hover:border-opacity-30;
+}
+
+  /* CHAT ELEMENTS */
+  .chat-container {
+    @apply bg-white border border-border-chat rounded-sonam-lg shadow-chat p-4;
+  }
+
+  .chat-input {
+    @apply w-full px-4 py-3 border-0 resize-none focus:outline-none placeholder:text-text-light;
+    @apply min-h-[48px] max-h-[120px];
+  }
+
+  .chat-button {
+    @apply p-3 bg-sonam-primary text-white rounded-full hover:bg-sonam-active transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-sonam-primary focus:ring-opacity-50;
+  }
+
+  /* MESSAGE BUBBLES */
+  .message-user {
+    @apply bg-sonam-primary text-white rounded-sonam-md p-4 ml-auto max-w-[80%];
+  }
+
+  .message-ai {
+    @apply bg-white border border-border-light rounded-sonam-md p-4 mr-auto max-w-[85%] shadow-card;
+  }
+
+  /* SCROLLBARS CUSTOM */
+  .scrollbar-sonam {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(96, 0, 70, 0.3) transparent;
+  }
+
+  .scrollbar-sonam::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  .scrollbar-sonam::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-sonam::-webkit-scrollbar-thumb {
+    background-color: rgba(96, 0, 70, 0.3);
+    border-radius: 3px;
+  }
+
+  .scrollbar-sonam::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(96, 0, 70, 0.5);
+  }
+
+  /* LAYOUT HELPERS */
+  .workspace-layout {
+    @apply flex h-screen bg-bg-light overflow-hidden;
+  }
+
+  .main-content {
+    @apply flex-1 flex flex-col overflow-hidden;
+  }
+
+  .history-sidebar {
+    @apply w-96 bg-white shadow-history border-l border-border-light;
+  }
+
+  /* RESPONSIVE UTILITIES */
+  .mobile-only {
+    @apply block md:hidden;
+  }
+
+  .desktop-only {
+    @apply hidden md:block;
+  }
+
+  /* LOADING STATES */
+  .loading-spinner {
+    @apply animate-spin rounded-full h-6 w-6 border-2 border-sonam-primary border-t-transparent;
+  }
+
+  .loading-skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+
+  /* TRANSITIONS SONAM */
+  .transition-sonam {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .transition-sonam-slow {
+    @apply transition-all duration-300 ease-out;
+  }
+}
+
+/* ================================
+   UTILITAIRES GLOBAUX
+   ================================ */
+
+@layer utilities {
+  /* Masquer scrollbar mais garder fonctionnalité */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient SONAM */
+  .gradient-sonam {
+    background: linear-gradient(135deg, #600046 0%, #701A59 100%);
+  }
+
+  .gradient-sonam-light {
+    background: linear-gradient(135deg, rgba(96, 0, 70, 0.05) 0%, rgba(112, 26, 89, 0.05) 100%);
+  }
+
+  /* Glass effect */
+  .glass-sonam {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Shadows custom */
+  .shadow-sonam {
+    box-shadow: 0 4px 20px rgba(96, 0, 70, 0.12);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===================================
+   CHAT MODERNE - ZONE INPUT BOTTOM
+   =================================== */
+
+.chat-input-container {
+  @apply sticky bottom-0 bg-white border-t border-border-light p-4;
+}
+
+.chat-input-wrapper {
+  @apply max-w-3xl mx-auto relative rounded-2xl border border-border-light bg-white
+         transition-shadow duration-200;
+  box-shadow: 0 4px 20px rgba(96, 0, 70, 0.08);
+}
+
+.chat-input-wrapper:hover {
+  box-shadow: 0 4px 24px rgba(96, 0, 70, 0.12);
+}
+
+.chat-input-wrapper:focus-within {
+  @apply border-sonam-primary;
+  box-shadow: 0 4px 28px rgba(96, 0, 70, 0.15);
+}
+
+.chat-textarea-modern {
+  @apply w-full px-4 py-3 resize-none border-0 focus:outline-none
+         text-text-primary placeholder-text-light;
+  min-height: 56px;
+  max-height: 200px;
+  line-height: 1.5;
+}
+
+.chat-input-toolbar {
+  @apply flex items-center justify-between px-4 py-2 border-t border-border-light;
+}
+
+.chat-attach-button {
+  @apply p-2 hover:bg-bg-light rounded-md transition-colors;
+}
+
+.chat-char-counter {
+  @apply text-xs text-text-light;
+}
+
+.chat-send-button {
+  @apply p-2 bg-sonam-primary text-white rounded-lg 
+         hover:bg-sonam-active disabled:opacity-50 disabled:cursor-not-allowed
+         transition-all duration-200 active:scale-95;
+}
+
+.chat-send-button:disabled {
+  @apply bg-gray-300;
+}
+
+/* ===================================
+   MESSAGES AVEC AVATARS
+   =================================== */
+
+.message-container {
+  @apply flex gap-3 mb-6;
+}
+
+.message-container.user {
+  @apply flex-row-reverse;
+}
+
+.message-avatar {
+  @apply flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center
+         text-sm font-semibold;
+}
+
+.message-avatar.user {
+  @apply bg-sonam-primary text-white;
+}
+
+.message-avatar.ai {
+  @apply bg-gradient-to-br from-sonam-primary to-sonam-active text-white;
+}
+
+.message-content-wrapper {
+  @apply flex-1 max-w-[75ch];
+}
+
+/* ===================================
+   ACTIONS HOVER SUR MESSAGES
+   =================================== */
+
+.message-actions {
+  @apply absolute -bottom-8 right-0 opacity-0 group-hover:opacity-100
+         transition-opacity flex gap-1;
+}
+
+.message-action-button {
+  @apply p-1.5 bg-white border border-border-light rounded hover:bg-bg-light
+         transition-colors;
+}
+
+.message-action-button:hover {
+  @apply border-sonam-primary text-sonam-primary;
+}
+
+/* ===================================
+   TYPING INDICATOR MODERNE
+   =================================== */
+
+.typing-indicator-container {
+  @apply flex gap-3 mb-6;
+}
+
+.typing-dots {
+  @apply flex gap-1;
+}
+
+.typing-dot {
+  @apply w-2 h-2 bg-sonam-primary rounded-full animate-bounce;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.typing-text {
+  @apply text-sm text-text-secondary;
+}
+
+/* ===================================
+   LAYOUT AVEC PLUS D'AIR
+   =================================== */
+
+.chat-messages-container {
+  /* @apply flex-1 overflow-y-auto p-6 min-h-0 scrollbar-sonam; */
+  @apply flex-1 overflow-y-auto min-h-0 scrollbar-sonam;
+  padding: 1.5rem; /* 24px - équivalent de p-6 mais plus explicite */
+  height: 100%; /* Force la hauteur */
+  
+}
+
+.chat-messages-inner {
+  @apply max-w-3xl mx-auto space-y-6;
+}
+
+/* ===================================
+   MICRO-ANIMATIONS
+   =================================== */
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ===================================
+   HOVER EFFECTS
+   =================================== */
+
+.message-bubble-ai {
+  @apply transition-all duration-200;
+}
+
+.message-content-wrapper:hover .message-bubble-ai {
+  @apply shadow-md;
+}
+
+/* ===================================
+   CONVERSATION HEADER
+   =================================== */
+
+.conversation-header {
+  @apply sticky top-0 z-10 bg-white border-b border-border-light px-6 py-3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.conversation-title {
+  @apply text-base font-semibold text-text-primary;
+}
+
+.conversation-title-input {
+  @apply px-3 py-1 border border-sonam-primary rounded-md 
+         focus:outline-none focus:ring-2 focus:ring-sonam-primary focus:ring-opacity-50
+         text-base font-semibold text-text-primary;
+  min-width: 300px;
+}
+
+.conversation-edit-button {
+  @apply p-1.5 hover:bg-bg-light rounded-md transition-colors
+         text-text-secondary hover:text-sonam-primary;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   RESPONSIVE BREAKPOINTS
+   ================================ */
+
+/* Mobile - Sidebar en overlay avec position fixe */
+@media (max-width: 767px) {
+  .sidebar-main {
+    @apply fixed inset-y-0 left-0 z-50 transform transition-transform duration-300;
+  }
+}
+
+/* Desktop - Position relative normale, largeurs gérées par les classes */
+@media (min-width: 768px) {
+  .sidebar-main {
+    @apply relative;
+  }
+}
+
+
+

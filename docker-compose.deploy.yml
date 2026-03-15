@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  # === FRONTEND (React + Nginx) ===
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rag-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: always
+    networks:
+      - rag-network
+
+  # === BACKEND (FastAPI) ===
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: dockerfile
+    container_name: rag-backend
+    env_file:
+      - .env.deploy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://raguser:prodPass123@postgres:5432/ragbot_prod
+      - REDIS_URL=redis://redis:6379
+      - QDRANT_URL=http://qdrant:6333
+      - OLLAMA_URL=http://ollama:11434
+    volumes:
+      - rag_uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
+    networks:
+      - rag-network
+
+  # === DATABASES & AI SERVICES ===
+  postgres:
+    image: postgres:15-alpine
+    container_name: rag-postgres
+    environment:
+      POSTGRES_DB: ragbot_prod
+      POSTGRES_USER: raguser
+      POSTGRES_PASSWORD: prodPass123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U raguser -d ragbot_prod"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - rag-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: rag-redis
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - rag-network
+
+  qdrant:
+    image: qdrant/qdrant:v1.11.0
+    container_name: rag-qdrant
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+    restart: always
+    networks:
+      - rag-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: rag-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: always
+    networks:
+      - rag-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  ollama_data:
+  rag_uploads:
+
+networks:
+  rag-network:
+    driver: bridge

@@ -1,0 +1,55 @@
+#docker-compose.prod.yml
+services:
+  postgres-prod:
+    image: postgres:15-alpine
+    container_name: postgres-prod
+    environment:
+      POSTGRES_DB: ragbot_prod
+      POSTGRES_USER: raguser
+      POSTGRES_PASSWORD: prodPass123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
+    command: >
+      postgres -c max_connections=200
+        -c shared_buffers=512MB
+        -c effective_cache_size=4GB
+        -c log_statement=all
+        -c log_destination=stderr
+        -c logging_collector=on
+
+  redis-prod:
+    image: redis:7-alpine
+    container_name: redis-prod
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_prod_data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 1GB --maxmemory-policy allkeys-lru
+
+  qdrant-prod:
+    image: qdrant/qdrant:v1.11.0
+    container_name: qdrant-prod
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_prod_data:/qdrant/storage
+    restart: unless-stopped
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+      QDRANT__SERVICE__GRPC_PORT: 6334
+      QDRANT__STORAGE__STORAGE_PATH: /qdrant/storage
+      QDRANT__LOG_LEVEL: INFO
+
+volumes:
+  postgres_prod_data:
+  redis_prod_data:
+  qdrant_prod_data:
+
+networks:
+  default:
+    name: rag-prod-network

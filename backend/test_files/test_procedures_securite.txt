@@ -1,0 +1,45 @@
+GUIDE SÉCURITÉ ET PROCÉDURES - VERSION 2024
+
+CHAPITRE 1 - SÉCURITÉ PHYSIQUE
+
+1.1 Contrôle d'accès
+- Le badge électronique est obligatoire pour accéder aux locaux
+- Interdiction formelle de prêter son badge à un tiers
+- Perte de badge à signaler immédiatement à la sécurité (poste 8000)
+- Horaires d'accès : 6h00-22h00 en semaine, 8h00-18h00 le weekend
+
+1.2 Visiteurs
+- Tout visiteur doit être accompagné en permanence
+- Inscription obligatoire à l'accueil avec pièce d'identité
+- Badge visiteur temporaire fourni et à restituer en fin de visite
+
+CHAPITRE 2 - SÉCURITÉ INFORMATIQUE
+
+2.1 Mots de passe
+- Minimum 12 caractères avec majuscules, minuscules, chiffres et symboles
+- Changement obligatoire tous les 3 mois
+- Interdiction d'utiliser le même mot de passe sur plusieurs systèmes
+- Pas de mots de passe liés à des informations personnelles
+
+2.2 Données sensibles
+- Classification des données : Public, Interne, Confidentiel, Secret
+- Chiffrement obligatoire pour les données Confidentielles et Secret
+- Interdiction de stockage sur supports personnels (clé USB, cloud perso)
+- Sauvegarde automatique sur serveurs sécurisés de l'entreprise
+
+2.3 Incidents de sécurité
+- Tout incident de sécurité doit être signalé dans l'heure à security@company.com
+- Types d'incidents : phishing, malware, perte d'équipement, accès non autorisé
+- Numéro d'urgence sécurité : 0800-SEC-HELP (24h/24)
+
+CHAPITRE 3 - TÉLÉTRAVAIL
+
+3.1 Conditions
+- 2 jours de télétravail maximum par semaine après validation manager
+- Espace de travail sécurisé au domicile
+- Connexion VPN obligatoire pour accéder aux ressources internes
+
+3.2 Équipements
+- Ordinateur portable fourni par l'entreprise exclusivement
+- Écran externe et accessoires pris en charge jusqu'à 500€
+- Maintenance et support technique assurés par l'IT

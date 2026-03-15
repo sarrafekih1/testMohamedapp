@@ -1,0 +1,38 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+# gcc: pour compiler certaines libs python
+# curl: pour le healthcheck dans docker-compose
+# libmagic1: pour la détection de type de fichier
+RUN apt-get update && apt-get install -y \
+    gcc \
+    curl \
+    libmagic1 \
+    libmagic-mgc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    TOKENIZERS_PARALLELISM=false
+
+# Copy requirements and install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# --- PRE-DOWNLOAD EMBEDDINGS MODEL ---
+# On pré-télécharge le modèle utilisé par défaut pour qu'il soit dans l'image
+# Cela évite le téléchargement au démarrage du conteneur
+RUN python3 -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')"
+
+# Copy application
+COPY . .
+
+# Create uploads directory
+RUN mkdir -p /app/uploads
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

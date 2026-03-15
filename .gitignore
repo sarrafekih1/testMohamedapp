@@ -1,0 +1,32 @@
+# Environnements et dépendances
+node_modules/
+venv/
+.venv/
+rag-chatbot-mvp/
+__pycache__/
+*.pyc
+
+# Secrets et Configuration (TRÈS IMPORTANT)
+.env
+.env.*
+!.env.deploy.example
+security_audit_report.log
+
+# Données et Backups
+backups/
+backend/uploads/*
+!backend/uploads/.gitkeep
+qdrant_data/
+postgres_data/
+redis_data/
+ollama_data/
+
+# Fichiers OS et temporaires
+.DS_Store
+*.tar.gz
+*.log
+tmp/
+temp/
+backend/startup.log
+backend/startup_v2.log
+backend/debug_start.py

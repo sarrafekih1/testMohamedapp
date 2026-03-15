@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO & Meta -->
+  <title>SONAM RAG - Assistant IA pour Documents d'Assurance</title>
+  <meta name="description" content="Solution RAG intelligente pour interroger vos documents d'assurance SONAM. Posez vos questions, obtenez des réponses précises et sourcées." />
+  <meta name="keywords" content="SONAM, assurance, RAG, IA, documents, Sénégal" />
+  <meta name="author" content="SONAM Assurance" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SONAM RAG - Assistant IA pour Documents d'Assurance" />
+  <meta property="og:description" content="Solution RAG intelligente pour interroger vos documents d'assurance SONAM." />
+  <meta property="og:url" content="https://rag.sonamassurances.sn" />
+  <meta property="og:site_name" content="SONAM RAG" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SONAM RAG - Assistant IA pour Documents d'Assurance" />
+  <meta name="twitter:description" content="Solution RAG intelligente pour interroger vos documents d'assurance SONAM." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/sonam-favicon.svg" />
+  <link rel="icon" type="image/png" href="/sonam-favicon.png" />
+  <link rel="apple-touch-icon" href="/sonam-apple-touch-icon.png" />
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#600046" />
+  <meta name="msapplication-TileColor" content="#600046" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Variables pour SONAM -->
+  <style>
+    :root {
+      --sonam-primary: #600046;
+      --sonam-accent: #7FC41C;
+      --sonam-active: #4B0037;
+      --sonam-profile: #701A59;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    /* Base styles */
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #FAFAFA;
+      color: #1F2937;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    #root {
+      min-height: 100vh;
+      width: 100%;
+    }
+    
+    /* Loading styles */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--sonam-primary) 0%, var(--sonam-active) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    
+    .loading-logo {
+      color: white;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-top: 1rem;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Scrollbar customization */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(96, 0, 70, 0.3);
+      border-radius: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(96, 0, 70, 0.5);
+    }
+    
+    /* Selection colors */
+    ::selection {
+      background-color: var(--sonam-primary);
+      color: white;
+    }
+    
+    ::-moz-selection {
+      background-color: var(--sonam-primary);
+      color: white;
+    }
+  </style>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/src/styles/sonam.css" as="style" />
+  
+  <!-- Security headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SONAM RAG",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Assistant IA pour interroger les documents d'assurance SONAM",
+    "provider": {
+      "@type": "Organization",
+      "name": "SONAM Assurance",
+      "url": "https://sonamassurances.sn"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Loading screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div>
+      <div class="loading-logo">SONAM RAG</div>
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+  
+  <!-- React root -->
+  <div id="root"></div>
+  
+  <!-- Remove loading screen when React loads -->
+  <script>
+    // Simple loading screen removal
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+          loadingScreen.style.opacity = '0';
+          loadingScreen.style.transition = 'opacity 0.3s ease-out';
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+          }, 300);
+        }
+      }, 1000);
+    });
+    
+    // Hide loading screen when React app is ready
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+          loadingScreen.style.display = 'none';
+        }
+      }, 500);
+    });
+  </script>
+  
+  <!-- Vite script -->
+  <script type="module" src="/src/main.tsx"></script>
+  
+  <!-- Fallback for users with JavaScript disabled -->
+  <noscript>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; text-align: center; padding: 2rem;">
+      <div>
+        <h1 style="color: #600046; margin-bottom: 1rem;">SONAM RAG</h1>
+        <p style="color: #666; margin-bottom: 2rem;">Cette application nécessite JavaScript pour fonctionner.</p>
+        <p style="color: #666;">Veuillez activer JavaScript dans votre navigateur et rafraîchir la page.</p>
+      </div>
+    </div>
+  </noscript>
+</body>
+</html>
