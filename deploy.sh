@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-VM_IP="209.97.156.200"
+VM_IP="192.168.112.130"
 VM_USER="root"
 SSH_KEY="~/.ssh/second_sshkey"
 DEST_DIR="/root/rag-app"

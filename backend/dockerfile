@@ -20,8 +20,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # Copy requirements and install
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 # --- PRE-DOWNLOAD EMBEDDINGS MODEL ---
 # On pré-télécharge le modèle utilisé par défaut pour qu'il soit dans l'image
 # Cela évite le téléchargement au démarrage du conteneur

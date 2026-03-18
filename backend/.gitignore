@@ -256,9 +256,9 @@ postgres-data/
 redis-data/
 
 # AI model cache
-.cache/
-models/
-embeddings_cache/
+#.cache/
+#models/
+#embeddings_cache/
 
 # Temporary processing files
 temp/

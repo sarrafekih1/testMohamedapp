@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rag-index-cron
+spec:
+  schedule: "*/5 * * * *" # Exécute toutes les 5 minutes
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: rag-index-job
+            image: sarra142/rag-backend:latest # Même image que le backend
+            command: ["python", "init_rag_index.py"]
+            envFrom:
+            - configMapRef: { name: rag-config }
+            - secretRef: { name: rag-secrets }
